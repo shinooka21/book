@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>書籍編集</title>
+</head>
+<body>
+    <h1>書籍編集</h1>
+    <form th:action="@{'/update/' + ${book.id}}" method="post" th:object="${book}">
+        <input type="hidden" name="originalStatus" th:value="${book.status}" />
+        <table>
+            <tr>
+                <td>タイトル:</td>
+                <td><input type="text" th:field="*{title}" required></td>
+            </tr>
+            <tr>
+                <td>著者:</td>
+                <td><input type="text" th:field="*{author}" required></td>
+            </tr>
+            <tr>
+                <td>ISBN:</td>
+                <td><input type="text" th:field="*{isbn}" required></td>
+            </tr>
+            <!-- 他の編集項目があれば追加 -->
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit">保存</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

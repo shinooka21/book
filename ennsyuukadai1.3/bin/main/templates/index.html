@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>書籍一覧</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>書籍一覧</h1>
+
+    <form action="/search" method="get">
+        <label for="searchId">書籍ID検索:</label>
+        <input type="text" id="searchId" name="id" required>
+        <button type="submit">検索</button>
+    </form>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th>ID</th>
+            <th>ISBN</th>
+            <th>貸出状況</th>
+            <th>貸し出し履歴</th>
+            <th>削除</th>
+            <th>更新</th>
+            <th>借りる/返却する</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.isbn}"></td>
+            <td th:text="${book.status}"></td>
+            <td>
+                <form th:action="@{/borrow-history/{id}(id=${book.id})}" method="get">
+        <button type="submit">履歴</button>
+    </form>
+            </td>
+            <td>
+                <form action="/delete" method="get">
+                    <input type="hidden" name="id" th:value="${book.id}">
+                    <input type="submit" value="削除">
+                </form>
+            </td>
+            <td>
+                <form action="/edit" method="get">
+                <input type="hidden" name="id" th:value="${book.id}">
+                <input type="submit" value="更新">
+                </form>
+
+
+            </td>
+            <td>
+                <form th:action="@{/lend/{id}(id=${book.id})}" method="post">
+                    <input type="hidden" name="bookId" th:value="${book.id}">
+                    <button type="submit">借りる</button>
+                </form> 
+                <form th:action="@{/return/{id}(id=${book.id})}" method="post">
+                    <input type="hidden" name="bookId" th:value="${book.id}">
+                    <button type="submit">返却する</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 新規登録ボタンを追加 -->
+    <a href="/add">書籍の新規登録</a>
+
+</body>
+</html>

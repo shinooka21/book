@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>貸出確認</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>この本を借りますか？</h2>
+
+    <div>
+        <p>書籍情報:</p>
+        <ul>
+            <li>ID: <span th:text="${book.id}"></span></li>
+            <li>タイトル: <span th:text="${book.title}"></span></li>
+            <li>著者: <span th:text="${book.author}"></span></li>
+            <li>ISBN: <span th:text="${book.isbn}"></span></li>
+        </ul>
+    </div>
+
+    <form th:action="@{/lend/{id}(id=${book.id})}" method="post">
+        <input type="hidden" name="bookId" th:value="${book.id}">
+        <button type="submit">借りる</button>
+    </form>
+</body>
+</html>
