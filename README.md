@@ -1,4 +1,4 @@
-# book-management-system 書籍管理システム
+# ennsyuukadai1.3 書籍管理システム
 このプロジェクトは、書籍を管理するための簡易的なウェブアプリケーションです。
 書籍の追加や検索、削除などをすることができます。
 
@@ -18,7 +18,7 @@
 
 ## ディレクトリ構造
 
-ennsyuukadai1.3-system/
+ennsyuukadai1.3/
 |-- src/
 |   |-- main/
 |   |   |-- java/com/example/demo
